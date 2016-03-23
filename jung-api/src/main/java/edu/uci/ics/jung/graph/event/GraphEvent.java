@@ -18,9 +18,6 @@ public abstract class GraphEvent<V,E> {
 	/**
 	 * Creates an instance with the specified {@code source} graph and {@code Type}
 	 * (vertex/edge addition/removal).
-	 * 
-	 * @param source the graph whose event this is
-	 * @param type the type of event this is
 	 */
 	public GraphEvent(Graph<V, E> source, Type type) {
 		this.source = source;
@@ -30,11 +27,14 @@ public abstract class GraphEvent<V,E> {
 	/**
 	 * Types of graph events.
 	 */
-	public static enum Type {
+	public enum Type {
 		VERTEX_ADDED,
 		VERTEX_REMOVED,
+		VERTEX_CHANGED,
 		EDGE_ADDED,
-		EDGE_REMOVED
+		EDGE_REMOVED,
+		EDGE_CHANGED,
+        LAYOUT_UPDATED
 	}
 	
     /**
@@ -45,10 +45,6 @@ public abstract class GraphEvent<V,E> {
 		
 		/**
 		 * Creates a graph event for the specified graph, vertex, and type.
-		 * 
-         * @param source the graph whose event this is
-         * @param type the type of event this is
-         * @param vertex the vertex involved in this event
 		 */
 		public Vertex(Graph<V,E> source, Type type, V vertex) {
 			super(source,type);
@@ -56,7 +52,7 @@ public abstract class GraphEvent<V,E> {
 		}
 		
 		/**
-		 * @return the vertex associated with this event
+		 * Retrieves the vertex associated with this event.
 		 */
 		public V getVertex() {
 			return vertex;
@@ -77,10 +73,6 @@ public abstract class GraphEvent<V,E> {
 		
         /**
          * Creates a graph event for the specified graph, edge, and type.
-         * 
-         * @param source the graph whose event this is
-         * @param type the type of event this is
-         * @param edge the edge involved in this event
          */
 		public Edge(Graph<V,E> source, Type type, E edge) {
 			super(source,type);
@@ -88,7 +80,7 @@ public abstract class GraphEvent<V,E> {
 		}
 		
 		/**
-		 * @return the edge associated with this event.
+		 * Retrieves the edge associated with this event.
 		 */
 		public E getEdge() {
 			return edge;
